@@ -107,7 +107,6 @@ class MooncardTransaction(models.Model):
                 'mooncard.transaction')
         return super(MooncardTransaction, self).create(vals)
 
-    @api.multi
     def open_image_url(self):
         if not self.image_url:
             raise UserError(_(
@@ -119,7 +118,6 @@ class MooncardTransaction(models.Model):
         }
         return action
 
-    @api.multi
     def unlink(self):
         for line in self:
             if line.state == 'done':
@@ -128,7 +126,6 @@ class MooncardTransaction(models.Model):
                     "done state.") % line.name)
         return super(MooncardTransaction, self).unlink()
 
-    @api.multi
     def process_line(self):
         raise UserError(_(
             "You must install the module mooncard_invoice or "
