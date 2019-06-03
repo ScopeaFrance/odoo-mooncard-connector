@@ -324,7 +324,7 @@ class MooncardCsvImport(models.TransientModel):
         fileobj.write(base64.b64decode(self.mooncard_file))
         fileobj.seek(0)
         file_content = fileobj.read()
-        if file_content.startswith('Identifiant unique;Collaborateur;Email'):
+        if file_content.startswith(b'Identifiant unique;Collaborateur;Email'):
             return self.mooncard_import_mileage(fileobj)
         fileobj.seek(0)
         reader = unicodecsv.DictReader(
