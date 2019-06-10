@@ -148,7 +148,7 @@ class MooncardTransaction(models.Model):
                 % self.card_id.name)
         journal = self.card_id.journal_id
         amlo = self.env['account.move.line']
-        date = self.date.to_string()[:10]
+        date = str(self.date.date())
         partner = self.partner_id.commercial_partner_id
         expense_amount = self.total_company_currency * -1
         precision = self.company_currency_id.rounding
