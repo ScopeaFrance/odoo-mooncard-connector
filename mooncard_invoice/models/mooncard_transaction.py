@@ -268,7 +268,7 @@ class MooncardTransaction(models.Model):
                 'price_unit': price_unit,
                 'name': self.description,
                 'qty': qty,
-                'uom': {'recordset': self.env.ref('product.product_uom_unit')},
+                'uom': {'recordset': self.env.ref('uom.product_uom_unit')},
             }],
             'origin': origin,
         }
