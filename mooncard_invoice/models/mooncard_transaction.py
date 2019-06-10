@@ -355,8 +355,8 @@ class MooncardTransaction(models.Model):
             'account_analytic': self.account_analytic_id or False,
         }
         invoice = aiio.create_invoice(parsed_inv, import_config=import_config)
-        invoice.message_post(_(
-            "Invoice created from Mooncard transaction %s.") % self.name)
+        invoice_message = _("Invoice created from Mooncard transaction %s.") % (self.name)
+        invoice.message_post(body=invoice_message)
         invoice.action_invoice_open()
         assert float_compare(
             invoice.amount_tax, abs(self.vat_company_currency),
