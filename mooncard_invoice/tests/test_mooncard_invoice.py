@@ -44,7 +44,7 @@ class TestMooncardInvoice(TransactionCase):
         self.assertEqual(load1.state, 'done')
         self.assertTrue(load1.load_move_id)
         self.assertEqual(load1.load_move_id.journal_id, self.card1.journal_id)
-        self.assertEqual(load1.load_move_id.date, load1.date[:10])
+        self.assertEqual(load1.load_move_id.date, str(load1.date.date()))
 
     def test_expense_line(self):
         for expense_xmlid in ['expense1', 'expense2', 'expense3']:
@@ -67,9 +67,9 @@ class TestMooncardInvoice(TransactionCase):
                 abs(expense.vat_company_currency),
                 inv.amount_tax,
                 precision_rounding=self.prec))
-            self.assertEqual(inv.date_invoice, expense.date[:10])
+            self.assertEqual(inv.date_invoice, str(expense.date.date()))
             pay_move_line = expense.payment_move_line_id
             self.assertTrue(pay_move_line)
-            self.assertEqual(pay_move_line.date, expense.date[:10])
+            self.assertEqual(pay_move_line.date, str(expense.date.date()))
             self.assertEqual(pay_move_line.journal_id, self.card1.journal_id)
             self.assertTrue(expense.reconcile_id)

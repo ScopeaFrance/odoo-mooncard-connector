@@ -89,7 +89,7 @@ class MooncardTransaction(models.Model):
 
     def _prepare_load_move(self):
         self.ensure_one()
-        date = self.date[:10]
+        date = str(self.date.date())
         precision = self.company_currency_id.rounding
         load_amount = self.total_company_currency
         if float_compare(load_amount, 0, precision_rounding=precision) > 0:
@@ -196,9 +196,9 @@ class MooncardTransaction(models.Model):
         if self.force_invoice_date:
             date = self.force_invoice_date
         elif self.payment_date:
-            date = self.payment_date[:10]
+            date = str(self.payment_date.date())
         else:
-            date = self.date[:10]
+            date = str(self.date.date())
         vat_compare = float_compare(
             self.vat_company_currency, 0, precision_rounding=precision)
         total_compare = float_compare(
